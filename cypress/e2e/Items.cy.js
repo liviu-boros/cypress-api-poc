@@ -11,7 +11,7 @@ for (const itemID of items) {
     before('Visit page', () => {
       cy.clearAllCookies()
       cy.visit(baseURL)
-      steam.resolveCookies()
+      // steam.resolveCookies()
     })
 
     it('Get API data and visit page', () => {
