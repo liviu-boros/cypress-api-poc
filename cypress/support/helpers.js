@@ -271,8 +271,8 @@ export class steam {
       .should('be.visible')
       .and('have.css', 'text-transform', 'uppercase')
       .next()
-      .contains(releaseDate)
-      // .should('be.visible')
+      .should('contain', releaseDate)
+      .and('be.visible')
 
       .parents('.glance_ctn')
       .scrollIntoView({ offset: { top: -300 } })
@@ -412,7 +412,8 @@ export class steam {
     cy.contains('Estimated total')
       .parents('.estimated_total_box')
       .scrollIntoView({ offset: { top: -300 } })
-      .contains('.price', totalPrice)
+      .find('.price')
+      .should('contain.text', totalPrice)
     // .should('be.visible')
   }
 
