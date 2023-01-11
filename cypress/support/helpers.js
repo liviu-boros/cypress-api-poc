@@ -236,8 +236,13 @@ export class steam {
       .scrollIntoView({ offset: { top: -300 } })
       .find('.game_header_image_ctn')
       .find('img')
-      .should('have.attr', 'src', headerImage.replace("akamai", "cloudflare"))
-      .should('be.visible')
+      .then((img) => {
+        cy.get(img)
+          .should('be.visible')
+          .invoke('attr', 'src')
+          .should('contain', headerImage)
+        cy.get(img)
+      })
 
       .parents('.glance_ctn')
       .scrollIntoView({ offset: { top: -300 } })
@@ -439,7 +444,12 @@ export class utils {
     itemObj[itemID] = response['body'][itemID]['data']
     itemObj[itemID]['pc_requirements']['minimum'] = utils.convertRequirementsToObject(itemObj[itemID]['pc_requirements']['minimum'])
     itemObj[itemID]['pc_requirements']['recommended'] = utils.convertRequirementsToObject(itemObj[itemID]['pc_requirements']['recommended'])
-    itemObj[itemID]['header_image'] = itemObj[itemID]['header_image'].replace("akamai", "cloudflare")
+    itemObj[itemID]['header_image'] = itemObj[itemID]['header_image']
+      .substring(
+        itemObj[itemID]['header_image'].indexOf('/steam'),
+        itemObj[itemID]['header_image'].length
+      )
+    // .replace("akamai", "cloudflare")
     itemObj[itemID]['recommendations']['total'] = String(itemObj[itemID]['recommendations']['total']).replace(/(\d)(?=(\d{3})+$)/g, "$1,")
     return itemObj
   }

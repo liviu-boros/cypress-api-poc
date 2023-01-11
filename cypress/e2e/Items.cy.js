@@ -20,12 +20,7 @@ for (const itemID of items) {
         url: `${baseURL}/api/appdetails?appids=${itemID}&cc=ro`,
       })
         .then((response) => {
-          itemObj[itemID] = response['body'][itemID]['data']
-          itemObj[itemID]['pc_requirements']['minimum'] = utils.convertRequirementsToObject(itemObj[itemID]['pc_requirements']['minimum'])
-          itemObj[itemID]['pc_requirements']['recommended'] = utils.convertRequirementsToObject(itemObj[itemID]['pc_requirements']['recommended'])
-          itemObj[itemID]['header_image'] = itemObj[itemID]['header_image']
-          // .replace("akamai", "cloudflare")
-          itemObj[itemID]['recommendations']['total'] = String(itemObj[itemID]['recommendations']['total']).replace(/(\d)(?=(\d{3})+$)/g, "$1,")
+          itemObj = utils.convertResponseToCleanObject(response, itemObj, itemID)
         })
     })
 
