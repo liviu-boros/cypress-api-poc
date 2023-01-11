@@ -10,7 +10,7 @@ describe(`Items are added to cart correctly`, () => {
   before('Visit page', () => {
     cy.clearAllCookies()
     cy.visit(baseURL)
-    steam.resolveCookies()
+    // steam.resolveCookies()
   })
 
   for (const itemID of items) {
