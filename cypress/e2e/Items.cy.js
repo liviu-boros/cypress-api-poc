@@ -17,7 +17,7 @@ for (const itemID of items) {
     it('Get API data and visit page', () => {
       cy.request({
         method: 'GET',
-        url: `${baseURL}/api/appdetails?appids=${itemID}&cc=ro`,
+        url: `${baseURL}/api/appdetails?appids=${itemID}&cc=us`,
       })
         .then((response) => {
           itemObj = utils.convertResponseToCleanObject(response, itemObj, itemID)

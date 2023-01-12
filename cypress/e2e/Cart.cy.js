@@ -17,7 +17,7 @@ describe(`Items are added to cart correctly`, () => {
     it(`Get API data for ${itemID}`, () => {
       cy.request({
         method: 'GET',
-        url: `${baseURL}/api/appdetails?appids=${itemID}&cc=ro`,
+        url: `${baseURL}/api/appdetails?appids=${itemID}&cc=us`,
       })
         .then((response) => {
           itemObj = utils.convertResponseToCleanObject(response, itemObj, itemID)
@@ -37,7 +37,7 @@ describe(`Items are added to cart correctly`, () => {
     }
     cy.get(itemObj).its(0)
       .then((item) => {
-        steam.verifyCartTotal(utils.sumPrices(item))
+        steam.verifyCartTotal(utils.sumPricesUS(item))
       })
   })
 

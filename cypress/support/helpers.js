@@ -435,6 +435,13 @@ export class utils {
     return requirementsObj
   }
 
+  static sumPricesUS(obj) {
+    return '$' + Object.values(obj).reduce((acc, curr) => {
+      return acc + parseFloat(curr.price_overview.final_formatted.slice(1))
+    }, 0)
+      .toFixed(2)
+  }
+
   static sumPrices(obj) {
     return Object.values(obj).reduce((acc, curr) => {
       return acc + parseFloat(curr.price_overview.final_formatted.replace(',', '.'))
